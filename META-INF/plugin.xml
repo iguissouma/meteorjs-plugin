@@ -1,0 +1,53 @@
+<idea-plugin version="2">
+    <id>com.igu.meteorjs-live</id>
+    <name>Meteor js live</name>
+    <version>1.0</version>
+    <vendor email="iguissouma@gmail.com" url="http://www.igu.com">igu</vendor>
+
+    <description><![CDATA[
+      This plugin add live template to meteorjs framework.<br>
+    ]]></description>
+
+    <change-notes><![CDATA[
+      No changes yet.<br>
+    ]]>
+    </change-notes>
+
+    <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
+    <idea-version since-build="131"/>
+
+    <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <defaultLiveTemplatesProvider implementation="org.igu.meteorjs.MeteorJSTemplatesProvider"/>
+        <projectTemplatesFactory implementation="org.igu.meteorjs.MeteorJSTemplateFactory"/>
+        <moduleBuilder builderClass="org.igu.meteorjs.MeteorJSBoilerplateModuleBuilder"/>
+    </extensions>
+
+
+    <project-components>
+        <!-- Add your project components here -->
+    </project-components>
+
+    <application-components>
+
+    </application-components>
+
+    <actions>
+        <action id="alternate_file" class="org.igu.meteorjs.MeteorJSAlternateFileAction"
+                text="Alternate File"
+                description="Switch the editor to the alternate file">
+            <keyboard-shortcut keymap="$default" first-keystroke="alt 8"/>
+            <keyboard-shortcut keymap="Mac OS X" first-keystroke="meta alt 8"/>
+            <keyboard-shortcut keymap="Mac OS X 10.5+" first-keystroke="meta alt 8"/>
+            <add-to-group group-id="EditorPopupMenu.GoTo" anchor="first"/>
+        </action>
+    </actions>
+
+
+</idea-plugin>

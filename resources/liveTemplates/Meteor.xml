@@ -1,0 +1,182 @@
+<templateSet group="Meteor">
+  <template name="mtp" value="&lt;template name=&quot;$name$&quot;&gt;&#10;  $END$&#10;&lt;/template&gt;" description="Blaze Template." toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="underscoresToCamelCase(fileNameWithoutExtension())" defaultValue="underscoresToCamelCase(fileNameWithoutExtension())" alwaysStopAt="true" />
+    <context>
+      <option name="HTML_TEXT" value="true" />
+      <option name="HTML" value="true" />
+    </context>
+  </template>
+  <template name="mea" value="{{#each $collection$}}&#10;  $END$&#10;{{/each}}" description="To iterate over an array or database cursor, use {{#each}}" toReformat="false" toShortenFQNames="true">
+    <variable name="collection" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML_TEXT" value="true" />
+      <option name="HTML" value="true" />
+    </context>
+  </template>
+  <template name="mif" value="{{#if $statement$}}&#10;  $END$&#10;{{/if}}" description="Blaze #if." toReformat="true" toShortenFQNames="true">
+    <variable name="statement" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML_TEXT" value="true" />
+      <option name="HTML" value="true" />
+    </context>
+  </template>
+  <template name="mife" value="{{#if $statement$}}&#10;  $END$&#10;{{else}}&#10;  &#10;{{/if}}" description="Blaze #if else." toReformat="true" toShortenFQNames="true">
+    <variable name="statement" expression="" defaultValue="" alwaysStopAt="true" />
+    <context />
+  </template>
+  <template name="mevn" value="Template.$name$.events({&#10;  '$event$': function(e, t){&#10;    $END$&#10;  }&#10;});" description="Specify event handlers for this template." toReformat="true" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="event" expression="underscoresToCamelCase(fileNameWithoutExtension())" defaultValue="underscoresToCamelCase(fileNameWithoutExtension())" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="mhel" value="Template.$name$.helpers({&#10;  $helper$: function(){&#10;    $END$&#10;  }&#10;});" description="Specify template helpers available to this template." toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="underscoresToCamelCase(fileNameWithoutExtension())" defaultValue="underscoresToCamelCase(fileNameWithoutExtension())" alwaysStopAt="true" />
+    <variable name="helper" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="mcol" value="$Collection$ = new Mongo.Collection(&quot;$collection$&quot;);" description="declare a collection with new Mongo.Collection." toReformat="true" toShortenFQNames="true">
+    <variable name="Collection" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="collection" expression="" defaultValue="decapitalize(Collection)" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="mtren" value="Template.$name$.rendered = function(){&#10;  $END$&#10;}" description="Provide a callback when an instance of a template is rendered." toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="underscoresToCamelCase(fileNameWithoutExtension())" defaultValue="underscoresToCamelCase(fileNameWithoutExtension())" alwaysStopAt="true" />
+    <context>
+      <option name="HTML_TEXT" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="mtcre" value="Template.$name$.created = function(){&#10;  $END$&#10;}" description="Provide a callback when an instance of a template is created." toReformat="true" toShortenFQNames="true">
+    <variable name="name" expression="underscoresToCamelCase(fileNameWithoutExtension())" defaultValue="underscoresToCamelCase(fileNameWithoutExtension())" alwaysStopAt="true" />
+    <context>
+      <option name="HTML_TEXT" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="mpub" value="Meteor.publish(&quot;$name$&quot;, function($argument$){&#10;  $END$&#10;});" description="Publish a record set." toReformat="true" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="argument" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="msub" value="Meteor.subscribe(&quot;$name$&quot;);" description="Subscribe to a record set." toReformat="true" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="msg" value="Session.get(&quot;$key$&quot;);" description="Get the value of a session variable." toReformat="true" toShortenFQNames="true">
+    <variable name="key" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="mss" value="Session.set(&quot;$key$&quot;, $value$);" description="Get the value of a session variable." toReformat="true" toShortenFQNames="true">
+    <variable name="key" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="value" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="msd" value="Session.setDefault(&quot;$key$&quot;, $value$);" description="Set a variable in the session if it hasn't been set before. Otherwise works exactly the same as Session.set." toReformat="true" toShortenFQNames="true">
+    <variable name="key" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="value" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="mse" value="Session.equals(&quot;$key$&quot;, $value$);" description="Test if a session variable is equal to a value." toReformat="true" toShortenFQNames="true">
+    <variable name="key" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="value" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="mic" value="Meteor.isClient" description="Boolean variable. True if running in client environment." toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="mis" value="Meteor.isServer" description="Boolean variable. True if running in server environment." toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="mico" value="Meteor.isCordova" description="Boolean variable. True if running in a Cordova mobile environment." toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="msta" value="Meteor.startup(function () {&#10;    $END$&#10; });" description="Run code when a client or a server starts." toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="mtdes" value="Template.$name$.destroyed = function(){&#10;  $END$&#10;}" description="Provide a callback when an instance of a template is destroyed." toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="underscoresToCamelCase(fileNameWithoutExtension())" defaultValue="underscoresToCamelCase(fileNameWithoutExtension())" alwaysStopAt="true" />
+    <context>
+      <option name="HTML_TEXT" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="merr" value="throw new Meteor.Error($number$, &quot;$description$&quot;);" description="throw Error" toReformat="true" toShortenFQNames="true">
+    <variable name="number" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="description" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="mcall" value="Meteor.call(&quot;$meteorMethod$&quot;, $dataObject$, function(error, result){&#10;if(error){&#10; console.log(&quot;error&quot;, error);&#10;}&#10;if(result){&#10;    $END$&#10;}&#10;});" description="Meteor call method." toReformat="true" toShortenFQNames="true">
+    <variable name="meteorMethod" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="dataObject" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+</templateSet>
