@@ -2,10 +2,10 @@
     <id>com.igu.meteorjs</id>
     <name>Meteor JS Template</name>
     <version>0.1.0</version>
-    <vendor email="iguissouma@gmail.com">iguissouma</vendor>
+    <vendor email="issam.guissouma@laposte.net">iguissouma</vendor>
 
     <description><![CDATA[
-      Meteor JS Template plugin:
+      Meteor JS Template plugin.
       <ul>
           <li>Add Meteor JS Boilerplate by Differential.</li>
           <li>Add Toggle action between HTML and JS files(Alt+8)</li>
