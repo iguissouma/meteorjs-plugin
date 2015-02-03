@@ -1,18 +1,21 @@
 package org.igu.meteorjs;
 
 import com.intellij.ide.util.projectWizard.WizardContext;
-import com.intellij.platform.ProjectTemplate;
-import com.intellij.platform.ProjectTemplatesFactory;
 import org.jetbrains.annotations.NotNull;
 
+import com.intellij.openapi.module.WebModuleBuilder;
+import com.intellij.platform.ProjectTemplate;
+import com.intellij.platform.ProjectTemplatesFactory;
+
 /**
- * Created by iguissouma on 31/01/2015.
+ * @author iguissouma
  */
 public class MeteorJSTemplateFactory extends ProjectTemplatesFactory {
+
     @NotNull
     @Override
     public String[] getGroups() {
-        return new String[]{MeteorJSBoilerplateModuleBuilder.GROUP_NAME};
+        return new String[]{WebModuleBuilder.GROUP_NAME};
     }
 
     @NotNull

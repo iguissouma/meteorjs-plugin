@@ -4,7 +4,7 @@ import com.intellij.codeInsight.template.impl.DefaultLiveTemplatesProvider;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by jason on 6/02/14.
+ * @author iguissouma
  */
 public class MeteorJSTemplatesProvider implements DefaultLiveTemplatesProvider {
     @Override

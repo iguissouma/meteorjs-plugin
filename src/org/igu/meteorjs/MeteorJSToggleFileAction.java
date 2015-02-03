@@ -18,9 +18,9 @@ import com.intellij.psi.PsiManager;
 import java.util.ArrayList;
 
 /**
- * Created by iguissouma on 01/02/2015.
+ * @author iguissouma
  */
-public class MeteorJSAlternateFileAction extends AnAction {
+public class MeteorJSToggleFileAction extends AnAction {
     private static VirtualFile getCurrentFile(AnActionEvent e) {
         return PlatformDataKeys.VIRTUAL_FILE.getData(e.getDataContext());
     }
@@ -43,22 +43,17 @@ public class MeteorJSAlternateFileAction extends AnAction {
         final VirtualFile currentFile = getCurrentFile(anActionEvent);
         final Project currentProject = getProject(anActionEvent);
         if (currentFile != null) {
-            // find these in project
-            // open these...
             // iterate thru files
             final String currentFilename = currentFile.getName();
             final String alternateName = getAlternateFileName(currentFilename);
-
             final ProjectFileIndex projectFileIndex = ProjectRootManager.getInstance(currentProject).getFileIndex();
             ArrayList<PsiFile> psiFiles = new ArrayList<PsiFile>();
             projectFileIndex.iterateContent(new ContentIterator() {
                 private PsiManager psiManager = PsiManager.getInstance(currentProject);
-
                 public boolean processFile(VirtualFile fileOrDir) {
                     // if not a directory
                     if (!fileOrDir.isDirectory()) {
                         // and not currentFile...
-                        System.out.println("fileOrDir.getName() = " + fileOrDir.getName());
                         if (!currentFilename.equals(fileOrDir.getName()) || !currentFile.getPath().equals(fileOrDir.getPath())) {
                             // iterate thru matchers and test...
                             if (alternateName.equals(fileOrDir.getName())) {

@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 /**
- * Created by iguissouma on 31/01/2015.
+ * @author iguissouma
  */
 public class MeteorJSDifferentialProjectGenerator extends AbstractGithubTagDownloadedProjectGenerator {
 

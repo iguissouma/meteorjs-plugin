@@ -1,21 +1,14 @@
 package org.igu.meteorjs;
 
-import com.intellij.icons.AllIcons;
-import com.intellij.ide.util.frameworkSupport.FrameworkRole;
-import com.intellij.ide.util.projectWizard.ModuleBuilder;
-import com.intellij.openapi.module.EmptyModuleType;
-import com.intellij.openapi.module.ModuleType;
+import javax.swing.*;
+
 import com.intellij.openapi.module.WebModuleBuilder;
-import com.intellij.openapi.module.WebModuleType;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.util.IconLoader;
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
 
 /**
- * Created by iguissouma on 31/01/2015.
+ * @author iguissouma
  */
 public class MeteorJSBoilerplateModuleBuilder extends WebModuleBuilder {
 
