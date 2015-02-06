@@ -7,6 +7,7 @@
     <description><![CDATA[
       Meteor JS Template plugin.
       <ul>
+          <li>Add JS/HTML File templates for Meteor.</li>
           <li>Add Meteor JS Boilerplate by Differential.</li>
           <li>Add Toggle action between HTML and JS files(Alt+8)</li>
           <li>Add Live templates for Meteor JS framework.</li>
@@ -14,6 +15,10 @@
     ]]></description>
 
     <change-notes><![CDATA[
+    Version 0.2.0<br>
+      <ul>
+          <li>Add JS/HTML File templates for Meteor</li>
+      </ul>
       Version 0.1.0<br>
       <ul>
           <li>Initial version</li>
