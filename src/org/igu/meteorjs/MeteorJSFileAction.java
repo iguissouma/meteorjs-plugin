@@ -9,12 +9,12 @@ import com.intellij.psi.PsiDirectory;
 /**
  * @author : iguissouma
  */
-public class CreateMeteorFileAction extends CreateFileFromTemplateAction {
+public class MeteorJSFileAction extends CreateFileFromTemplateAction {
     private static final String NEW_METEOR_HTML_FILE = "New Meteor file";
 
-    public CreateMeteorFileAction() {
+    public MeteorJSFileAction() {
         super("Create new Meteor File", "Meteor files",
-                MeteorFileTemplateUtil.ICON);
+                MeteorJSIcons.Meteor);
         
     }
 
@@ -23,10 +23,10 @@ public class CreateMeteorFileAction extends CreateFileFromTemplateAction {
     @Override
     protected void buildDialog(Project project, PsiDirectory psiDirectory, CreateFileFromTemplateDialog.Builder builder) {
         builder.setTitle("Add Meteor File");
-        for (FileTemplate fileTemplate : MeteorFileTemplateUtil.getMeteorTemplates()) {
+        for (FileTemplate fileTemplate : MeteorJSFileTemplateUtil.getMeteorTemplates()) {
             final String templateName = fileTemplate.getName();
-            final String shortName = MeteorFileTemplateUtil.getTemplateShortName(templateName);
-            builder.addKind(shortName, MeteorFileTemplateUtil.getTemplateIcon(shortName), templateName);
+            final String shortName = MeteorJSFileTemplateUtil.getTemplateShortName(templateName);
+            builder.addKind(shortName, MeteorJSFileTemplateUtil.getTemplateIcon(shortName), templateName);
         }
     }
 

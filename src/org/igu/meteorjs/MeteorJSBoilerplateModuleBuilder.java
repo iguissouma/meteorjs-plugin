@@ -21,12 +21,12 @@ public class MeteorJSBoilerplateModuleBuilder extends WebModuleBuilder {
 
     @Override
     public Icon getBigIcon() {
-        return IconLoader.getIcon("/icons/meteor@2x.png");
+        return MeteorJSIcons.Meteor;
     }
 
     @Override
     public Icon getNodeIcon() {
-        return IconLoader.getIcon("/icons/meteor.png");
+        return MeteorJSIcons.Meteor;
     }
 
     @Override

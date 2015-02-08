@@ -1,6 +1,7 @@
 package org.igu.meteorjs;
 
 import com.intellij.codeInsight.hint.HintManager;
+import com.intellij.ide.util.gotoByName.GotoFileCellRenderer;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.LangDataKeys;
@@ -11,10 +12,16 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ContentIterator;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.ui.popup.JBPopupFactory;
+import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.wm.ex.WindowManagerEx;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
+import com.intellij.ui.components.JBList;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -43,11 +50,11 @@ public class MeteorJSToggleFileAction extends AnAction {
         final VirtualFile currentFile = getCurrentFile(anActionEvent);
         final Project currentProject = getProject(anActionEvent);
         if (currentFile != null) {
-            // iterate thru files
+            // iterate through files
             final String currentFilename = currentFile.getName();
             final String alternateName = getAlternateFileName(currentFilename);
             final ProjectFileIndex projectFileIndex = ProjectRootManager.getInstance(currentProject).getFileIndex();
-            ArrayList<PsiFile> psiFiles = new ArrayList<PsiFile>();
+            final ArrayList<PsiFile> psiFiles = new ArrayList<PsiFile>();
             projectFileIndex.iterateContent(new ContentIterator() {
                 private PsiManager psiManager = PsiManager.getInstance(currentProject);
                 public boolean processFile(VirtualFile fileOrDir) {
@@ -55,12 +62,11 @@ public class MeteorJSToggleFileAction extends AnAction {
                     if (!fileOrDir.isDirectory()) {
                         // and not currentFile...
                         if (!currentFilename.equals(fileOrDir.getName()) || !currentFile.getPath().equals(fileOrDir.getPath())) {
-                            // iterate thru matchers and test...
+                            // test if it's equals to the alternate name
                             if (alternateName.equals(fileOrDir.getName())) {
-
                                 PsiFile psiFile = psiManager.findFile(fileOrDir);
                                 if (psiFile != null) {
-                                    psiFile.navigate(true);
+                                    psiFiles.add(psiFile);
                                 }
                             }
                         }
@@ -74,9 +80,25 @@ public class MeteorJSToggleFileAction extends AnAction {
                 if (editor != null) { // fix issue 9: can only display hint if there is a editor instance
                     HintManager.getInstance().showInformationHint(editor, "No corresponding file(s) found");
                 }
-            } else {
+            } else if (psiFiles.size() == 1) {
                 PsiFile psiFile = psiFiles.get(0);
                 psiFile.navigate(true);
+            } else {
+                final JList valueList = new JList(psiFiles.toArray());
+                valueList.setCellRenderer(new AlternateCellRenderer(currentProject));
+                valueList.setSelectionModel(new DefaultListSelectionModel());
+                final PopupChooserBuilder listPopupBuilder = JBPopupFactory.getInstance().createListPopupBuilder(valueList);
+                listPopupBuilder.setTitle("Select the file(s) to open");
+                listPopupBuilder.setItemChoosenCallback(new Runnable() {
+                    public void run() {
+                        for (Object item : valueList.getSelectedValues()) {
+                            if (item instanceof PsiFile) {
+                                ((PsiFile) item).navigate(true);
+                            }
+                        }
+                    }
+                });
+                listPopupBuilder.createPopup().showCenteredInCurrentWindow(currentProject);
             }
         }
 
@@ -99,6 +121,32 @@ public class MeteorJSToggleFileAction extends AnAction {
             return ".js";
         }
     }
+
+    /**
+     * CellRenderer, renders PsiFile with ideas GotoFileCellRenderer and all other with DefaultListCellRenderer like a title (bgcolor: control)
+     */
+    static class AlternateCellRenderer extends DefaultListCellRenderer {
+        private ListCellRenderer gotoFileCellRenderer;
+
+        AlternateCellRenderer(Project project) {
+            this.gotoFileCellRenderer = new GotoFileCellRenderer(WindowManagerEx.getInstanceEx().getFrame(project).getSize().width);
+        }
+
+        @Override
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            if (value instanceof PsiFile) {
+                return gotoFileCellRenderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            } else {
+                if (value.toString().length() == 0) {
+                    value = " "; // we need a character to have correct height
+                }
+                Component c = super.getListCellRendererComponent(list, value, index, false, cellHasFocus);
+                c.setBackground(UIManager.getColor("control"));
+                return c;
+            }
+        }
+    }
+
 
 
 }

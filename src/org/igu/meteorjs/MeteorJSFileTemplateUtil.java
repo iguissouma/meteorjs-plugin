@@ -10,18 +10,15 @@ import org.jetbrains.annotations.NotNull;
 import com.intellij.ide.fileTemplates.FileTemplate;
 import com.intellij.ide.fileTemplates.FileTemplateManager;
 import com.intellij.openapi.util.Condition;
-import com.intellij.openapi.util.IconLoader;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
 
 /**
  * @author: iguissouma
  */
-public class MeteorFileTemplateUtil {
+public class MeteorJSFileTemplateUtil {
 
     private final static String METEOR_TEMPLATE_PREFIX = "Meteor ";
-
-    public static final Icon    ICON                   = IconLoader.getIcon("/icons/meteor.png");
 
     public static List<FileTemplate> getMeteorTemplates() {
         return getApplicableTemplates(new Condition<FileTemplate>() {
@@ -55,7 +52,7 @@ public class MeteorFileTemplateUtil {
         } else if (name.startsWith("HTML")) {
             return AllIcons.FileTypes.Html;
         }
-        return ICON;
+        return MeteorJSIcons.Meteor;
     }
 
 }
