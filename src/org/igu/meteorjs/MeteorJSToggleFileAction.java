@@ -1,5 +1,10 @@
 package org.igu.meteorjs;
 
+import java.awt.*;
+import java.util.*;
+
+import javax.swing.*;
+
 import com.intellij.codeInsight.hint.HintManager;
 import com.intellij.ide.util.gotoByName.GotoFileCellRenderer;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -18,16 +23,16 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.ex.WindowManagerEx;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
-import com.intellij.ui.components.JBList;
-
-import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
 
 /**
  * @author iguissouma
  */
 public class MeteorJSToggleFileAction extends AnAction {
+
+    private static final String[] JS_FILES_EXT = {".js", ".coffee"};
+    private static final String[] HTML_FILES_EXT = {".html"};
+    private static final String[] EMPTY_FILES_EXT = {""};
+    
     private static VirtualFile getCurrentFile(AnActionEvent e) {
         return PlatformDataKeys.VIRTUAL_FILE.getData(e.getDataContext());
     }
@@ -52,7 +57,7 @@ public class MeteorJSToggleFileAction extends AnAction {
         if (currentFile != null) {
             // iterate through files
             final String currentFilename = currentFile.getName();
-            final String alternateName = getAlternateFileName(currentFilename);
+            final ArrayList<String> alternateNames = getAlternateFileName(currentFilename);
             final ProjectFileIndex projectFileIndex = ProjectRootManager.getInstance(currentProject).getFileIndex();
             final ArrayList<PsiFile> psiFiles = new ArrayList<PsiFile>();
             projectFileIndex.iterateContent(new ContentIterator() {
@@ -63,7 +68,7 @@ public class MeteorJSToggleFileAction extends AnAction {
                         // and not currentFile...
                         if (!currentFilename.equals(fileOrDir.getName()) || !currentFile.getPath().equals(fileOrDir.getPath())) {
                             // test if it's equals to the alternate name
-                            if (alternateName.equals(fileOrDir.getName())) {
+                            if (alternateNames.contains(fileOrDir.getName())) {
                                 PsiFile psiFile = psiManager.findFile(fileOrDir);
                                 if (psiFile != null) {
                                     psiFiles.add(psiFile);
@@ -104,21 +109,26 @@ public class MeteorJSToggleFileAction extends AnAction {
 
     }
 
-    private String getAlternateFileName(String fileName) {
+    private ArrayList<String> getAlternateFileName(String fileName) {
         String fileNameWithOutExt = fileName.replaceFirst("[.][^.]+$", "");
-        return fileNameWithOutExt + getAlternateFileExtension(fileName);
+        final ArrayList<String> list =  new ArrayList<String>();
+        final String[] alternateFileExtensions = getAlternateFileExtensions(fileName);
+        for (String alternateFileExtension : alternateFileExtensions) {
+            list.add(fileNameWithOutExt + alternateFileExtension);
+        }
+        return list;
     }
 
-    private String getAlternateFileExtension(String name) {
+    private String[] getAlternateFileExtensions(String name) {
         int lastIndexOf = name.lastIndexOf(".");
         if (lastIndexOf == -1) {
-            return ""; // empty extension
+            return EMPTY_FILES_EXT; // empty extension
         }
         String ext = name.substring(lastIndexOf).toLowerCase();
         if (".js".equals(ext) || ".coffee".equals(ext)) {
-            return ".html";
+            return HTML_FILES_EXT;
         } else {
-            return ".js";
+            return JS_FILES_EXT;
         }
     }
 
@@ -150,6 +160,3 @@ public class MeteorJSToggleFileAction extends AnAction {
 
 
 }
-
-
-
