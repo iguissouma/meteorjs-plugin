@@ -1,7 +1,7 @@
 <idea-plugin version="2">
     <id>com.igu.meteorjs</id>
     <name>Meteor JS Template</name>
-    <version>0.3.0</version>
+    <version>0.4.0</version>
     <vendor email="issam.guissouma@laposte.net">iguissouma</vendor>
 
     <description><![CDATA[
@@ -15,6 +15,11 @@
     ]]></description>
 
     <change-notes><![CDATA[
+    Version 0.4.0<br>
+      <ul>
+          <li>JDK 6 compliant</li>
+          <li>Fix mevn live template</li>
+      </ul>
     Version 0.3.0<br>
       <ul>
           <li>Add popup file chooser when there's more than one file when toggling between HTML/JS</li>
