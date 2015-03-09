@@ -9,7 +9,7 @@
       <ul>
           <li>Add JS/HTML File templates for Meteor.</li>
           <li>Add Meteor JS Boilerplate by Differential.</li>
-          <li>Add Toggle action between HTML and JS files([Alt][8])</li>
+          <li>Add Toggle action between HTML and JS|COFFEE files([Alt][8])</li>
           <li>Add Live templates for Meteor JS framework.</li>
       </ul>
     ]]></description>
@@ -22,7 +22,8 @@
       </ul>
     Version 0.3.0<br>
       <ul>
-          <li>Add popup file chooser when there's more than one file when toggling between HTML/JS</li>
+          <li>Add popup file chooser when there's more than one file and toggling between HTML/JS</li>
+          <li>Add Toggle action between HTML and JS|COFFEE files([Alt][8])</li>
       </ul>
     Version 0.2.0<br>
       <ul>
@@ -70,8 +71,8 @@
             <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFile"/>
         </action>
         <action id="org.igu.meteorjs.MeteorJSToggleFileAction" class="org.igu.meteorjs.MeteorJSToggleFileAction"
-                text="Toggle between the HTML an the JS files for meteor framework"
-                description="Toggle between the HTML an the JS files for meteor framework">
+                text="Toggle between the HTML and the JS|COFFEE files for meteor framework"
+                description="Toggle between the HTML and the JS|COFFEE files for meteor framework">
             <keyboard-shortcut keymap="$default" first-keystroke="alt 8"/>
             <keyboard-shortcut keymap="Mac OS X" first-keystroke="alt 8"/>
             <keyboard-shortcut keymap="Mac OS X 10.5+" first-keystroke="alt 8"/>
