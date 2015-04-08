@@ -1,26 +1,32 @@
 package org.igu.meteorjs;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.*;
 
 import javax.swing.*;
 
 import com.intellij.codeInsight.hint.HintManager;
+import com.intellij.ide.fileTemplates.FileTemplate;
+import com.intellij.ide.fileTemplates.FileTemplateManager;
 import com.intellij.ide.util.gotoByName.GotoFileCellRenderer;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.LangDataKeys;
-import com.intellij.openapi.actionSystem.PlatformDataKeys;
+import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ContentIterator;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.ex.WindowManagerEx;
+import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 
@@ -37,6 +43,11 @@ public class MeteorJSToggleFileAction extends AnAction {
         return PlatformDataKeys.VIRTUAL_FILE.getData(e.getDataContext());
     }
 
+    private static PsiFile getCurrentPsiFile(AnActionEvent e) {
+        return PlatformDataKeys.PSI_FILE.getData(e.getDataContext());
+    }
+
+
     private static Project getProject(AnActionEvent e) {
         return PlatformDataKeys.PROJECT.getData(e.getDataContext());
     }
@@ -52,7 +63,7 @@ public class MeteorJSToggleFileAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
-        final VirtualFile currentFile = getCurrentFile(anActionEvent);
+        final PsiFile currentFile = getCurrentPsiFile(anActionEvent);
         final Project currentProject = getProject(anActionEvent);
         if (currentFile != null) {
             // iterate through files
@@ -66,7 +77,7 @@ public class MeteorJSToggleFileAction extends AnAction {
                     // if not a directory
                     if (!fileOrDir.isDirectory()) {
                         // and not currentFile...
-                        if (!currentFilename.equals(fileOrDir.getName()) || !currentFile.getPath().equals(fileOrDir.getPath())) {
+                        if (!currentFilename.equals(fileOrDir.getName()) || !currentFile.getVirtualFile().getPath().equals(fileOrDir.getPath())) {
                             // test if it's equals to the alternate name
                             if (alternateNames.contains(fileOrDir.getName())) {
                                 PsiFile psiFile = psiManager.findFile(fileOrDir);
@@ -81,9 +92,14 @@ public class MeteorJSToggleFileAction extends AnAction {
             });
 
             if (psiFiles.isEmpty()) {
-                Editor editor = getEditor(anActionEvent);
-                if (editor != null) { // fix issue 9: can only display hint if there is a editor instance
-                    HintManager.getInstance().showInformationHint(editor, "No corresponding file(s) found");
+                PsiDirectory currentDir = currentFile.getContainingDirectory();
+                if (Messages.showOkCancelDialog("No corresponding file(s) found, " + "\n Do you want to create it?.", "Information", Messages.getInformationIcon()) == DialogWrapper.OK_EXIT_CODE) {
+                    //PsiDirectory currentDir = getCurrentPsiFile(anActionEvent).getContainingDirectory();
+                    for (String alternateName : alternateNames) {
+                        String extension = alternateName.toLowerCase().indexOf(".js") > 0 ? "JS" : "HTML";
+                        createFromTemplate("Meteor " + extension + " File", currentDir, alternateName, currentProject);
+                        break;
+                    }
                 }
             } else if (psiFiles.size() == 1) {
                 PsiFile psiFile = psiFiles.get(0);
@@ -131,6 +147,31 @@ public class MeteorJSToggleFileAction extends AnAction {
             return JS_FILES_EXT;
         }
     }
+
+    private void createFromTemplate(String templateName, final PsiDirectory dir, final String name, Project project) {
+        final FileTemplate template = FileTemplateManager.getInstance().getInternalTemplate(templateName);
+        Properties properties = new Properties(FileTemplateManager.getInstance().getDefaultProperties(project));
+        properties.setProperty("NAME", name);
+        final String fileContents;
+        try {
+            fileContents = template.getText(properties);
+        } catch (IOException e) {
+            throw new RuntimeException("Unable to parse template '" + templateName + "':" + e.getMessage());
+        }
+        final Application application = ApplicationManager.getApplication();
+        application.runWriteAction(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    dir.createFile(name).getVirtualFile().setBinaryContent(fileContents.getBytes());
+                } catch (IOException e) {
+                    throw new RuntimeException("Unable to write file '" + name + ":" + e.getMessage());
+                }
+            }
+        });
+
+    }
+
 
     /**
      * CellRenderer, renders PsiFile with ideas GotoFileCellRenderer and all other with DefaultListCellRenderer like a title (bgcolor: control)
