@@ -13,6 +13,7 @@ import com.intellij.ide.util.gotoByName.GotoFileCellRenderer;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
@@ -26,9 +27,9 @@ import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.ex.WindowManagerEx;
 import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
+import org.igu.meteorjs.settings.MeteorJSTemplateSettings;
 
 /**
  * @author iguissouma
@@ -92,13 +93,21 @@ public class MeteorJSToggleFileAction extends AnAction {
             });
 
             if (psiFiles.isEmpty()) {
-                PsiDirectory currentDir = currentFile.getContainingDirectory();
-                if (Messages.showOkCancelDialog("No corresponding file(s) found, " + "\n Do you want to create it?.", "Information", Messages.getInformationIcon()) == DialogWrapper.OK_EXIT_CODE) {
-                    //PsiDirectory currentDir = getCurrentPsiFile(anActionEvent).getContainingDirectory();
-                    for (String alternateName : alternateNames) {
-                        String extension = alternateName.toLowerCase().indexOf(".js") > 0 ? "JS" : "HTML";
-                        createFromTemplate("Meteor " + extension + " File", currentDir, alternateName, currentProject);
-                        break;
+                final MeteorJSTemplateSettings service = ServiceManager.getService(MeteorJSTemplateSettings.class);
+                if (service.ASK_FOR_FILE_CREATION) {
+                    PsiDirectory currentDir = currentFile.getContainingDirectory();
+                    if (Messages.showOkCancelDialog("No corresponding file(s) found, " + "\n Do you want to create it?.", "Information", Messages.getInformationIcon()) == DialogWrapper.OK_EXIT_CODE) {
+                        //PsiDirectory currentDir = getCurrentPsiFile(anActionEvent).getContainingDirectory();
+                        for (String alternateName : alternateNames) {
+                            String extension = alternateName.toLowerCase().indexOf(".js") > 0 ? "JS" : "HTML";
+                            createFromTemplate("Meteor " + extension + " File", currentDir, alternateName, currentProject);
+                            break;
+                        }
+                    }
+                } else {
+                    Editor editor = getEditor(anActionEvent);
+                    if (editor != null) { // fix issue 9: can only display hint if there is a editor instance
+                        HintManager.getInstance().showInformationHint(editor, "No corresponding file(s) found");
                     }
                 }
             } else if (psiFiles.size() == 1) {

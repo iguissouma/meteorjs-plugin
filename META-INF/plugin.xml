@@ -54,6 +54,13 @@
 
         <internalFileTemplate name="Meteor HTML File"/>
         <internalFileTemplate name="Meteor JS File"/>
+        <applicationService serviceInterface="org.igu.meteorjs.settings.MeteorJSTemplateSettings"
+                            serviceImplementation="org.igu.meteorjs.settings.MeteorJSTemplateSettings"/>
+        <projectConfigurable
+                instance="org.igu.meteorjs.settings.MeteorJSTemplateConfigurable"
+                id="settings.meteor.js.template"
+                parentId="Settings.JavaScript"
+                order="last, after settings.phonegap"/>
     </extensions>
 
 
