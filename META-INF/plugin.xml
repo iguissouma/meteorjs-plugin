@@ -15,6 +15,10 @@
     ]]></description>
 
     <change-notes><![CDATA[
+    Version 0.5.0<br>
+      <ul>
+          <li>Add option for file creation when toggling between files</li>
+      </ul>
     Version 0.4.0<br>
       <ul>
           <li>JDK 6 compliant</li>
@@ -29,7 +33,7 @@
       <ul>
           <li>Add JS/HTML File templates for Meteor</li>
       </ul>
-      Version 0.1.0<br>
+    Version 0.1.0<br>
       <ul>
           <li>Initial version</li>
       </ul>
