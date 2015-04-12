@@ -95,8 +95,8 @@ public class MeteorJSToggleFileAction extends AnAction {
             if (psiFiles.isEmpty()) {
                 final MeteorJSTemplateSettings service = ServiceManager.getService(MeteorJSTemplateSettings.class);
                 if (service.ASK_FOR_FILE_CREATION) {
-                    PsiDirectory currentDir = currentFile.getContainingDirectory();
                     if (Messages.showOkCancelDialog("No corresponding file(s) found, " + "\n Do you want to create it?.", "Information", Messages.getInformationIcon()) == DialogWrapper.OK_EXIT_CODE) {
+                        PsiDirectory currentDir = currentFile.getContainingDirectory();
                         //PsiDirectory currentDir = getCurrentPsiFile(anActionEvent).getContainingDirectory();
                         for (String alternateName : alternateNames) {
                             String extension = alternateName.toLowerCase().indexOf(".js") > 0 ? "JS" : "HTML";

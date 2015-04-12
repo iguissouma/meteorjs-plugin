@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
     )}
 )
 public class MeteorJSTemplateSettings implements PersistentStateComponent<MeteorJSTemplateSettings> {
-  public boolean ASK_FOR_FILE_CREATION = false;
+  public boolean ASK_FOR_FILE_CREATION = true;
 
   public static MeteorJSTemplateSettings getInstance() {
     return ServiceManager.getService(MeteorJSTemplateSettings.class);
