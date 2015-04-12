@@ -9,5 +9,5 @@
 #end
 #set ( $template = $template.substring(0,1).toLowerCase()+$template.substring(1) )
 <template name="$template">
-  <!--- Place your content here --->
+
 </template>

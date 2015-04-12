@@ -1,7 +1,7 @@
 <idea-plugin version="2">
     <id>com.igu.meteorjs</id>
     <name>Meteor JS Template</name>
-    <version>0.5.0</version>
+    <version>0.6.0</version>
     <vendor email="issam.guissouma@laposte.net">iguissouma</vendor>
 
     <description><![CDATA[
@@ -15,6 +15,10 @@
     ]]></description>
 
     <change-notes><![CDATA[
+    Version 0.6.0<br>
+      <ul>
+          <li>Blaze Updates: New template callbacks</li>
+      </ul>
     Version 0.5.0<br>
       <ul>
           <li>Add option for file creation when toggling between files</li>

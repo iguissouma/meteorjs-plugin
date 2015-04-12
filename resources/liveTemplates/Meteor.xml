@@ -51,7 +51,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="mtren" value="Template.$name$.rendered = function(){&#10;  $END$&#10;}" description="Provide a callback when an instance of a template is rendered." toReformat="false" toShortenFQNames="true">
+  <template name="mtren" value="Template.$name$.onRendered(function(){&#10;  $END$&#10;});" description="Provide a callback when an instance of a template is rendered." toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="underscoresToCamelCase(fileNameWithoutExtension())" defaultValue="underscoresToCamelCase(fileNameWithoutExtension())" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
@@ -59,7 +59,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="mtcre" value="Template.$name$.created = function(){&#10;  $END$&#10;}" description="Provide a callback when an instance of a template is created." toReformat="true" toShortenFQNames="true">
+  <template name="mtcre" value="Template.$name$.onCreated(function(){&#10;  $END$&#10;});" description="Provide a callback when an instance of a template is created." toReformat="true" toShortenFQNames="true">
     <variable name="name" expression="underscoresToCamelCase(fileNameWithoutExtension())" defaultValue="underscoresToCamelCase(fileNameWithoutExtension())" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
@@ -147,11 +147,12 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="mtdes" value="Template.$name$.destroyed = function(){&#10;  $END$&#10;}" description="Provide a callback when an instance of a template is destroyed." toReformat="false" toShortenFQNames="true">
+  <template name="mtdes" value="Template.$name$.onDestroyed(function(){&#10;  $END$&#10;});" description="Provide a callback when an instance of a template is destroyed." toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="underscoresToCamelCase(fileNameWithoutExtension())" defaultValue="underscoresToCamelCase(fileNameWithoutExtension())" alwaysStopAt="true" />
     <context>
-      <option name="HTML_TEXT" value="false" />
-      <option name="HTML" value="false" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="merr" value="throw new Meteor.Error($number$, &quot;$description$&quot;);" description="throw Error" toReformat="true" toShortenFQNames="true">

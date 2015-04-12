@@ -8,9 +8,9 @@
     #set($template = $template + $str)
 #end
 #set ( $template = $template.substring(0,1).toLowerCase()+$template.substring(1) )
-Template.${template}.created = function() {
-  //add your statement here 
-};
+Template.${template}.onCreated(function() {
+  //add your statement here
+});
 
 Template.${template}.helpers({
  //add you helpers here
