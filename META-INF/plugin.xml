@@ -9,7 +9,7 @@
       <ul>
           <li>Add JS/HTML File templates for Meteor.</li>
           <li>Add Meteor JS Boilerplate by Differential.</li>
-          <li>Add Toggle action between HTML and JS|COFFEE files([Alt][8])</li>
+          <li>Add Toggle action between HTML and JS|COFFEE files [Alt][Key Up]</li>
           <li>Add Live templates for Meteor JS framework.</li>
       </ul>
     ]]></description>
@@ -17,7 +17,8 @@
     <change-notes><![CDATA[
     Version 0.6.0<br>
       <ul>
-          <li>Blaze Updates: New template callbacks</li>
+          <li>Change default shortcut to [Alt][Key Up]</li>
+          <li>Blaze Updates: New template callbacks for liveTemplates and JS File Template</li>
       </ul>
     Version 0.5.0<br>
       <ul>

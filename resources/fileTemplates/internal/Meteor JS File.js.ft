@@ -8,10 +8,6 @@
     #set($template = $template + $str)
 #end
 #set ( $template = $template.substring(0,1).toLowerCase()+$template.substring(1) )
-Template.${template}.onCreated(function() {
-  //add your statement here
-});
-
 Template.${template}.helpers({
  //add you helpers here
 });
@@ -19,3 +15,16 @@ Template.${template}.helpers({
 Template.${template}.events({
  //add your events here
 });
+
+Template.${template}.onCreated(function() {
+    //add your statement here
+});
+
+Template.${template}.onRendered(function() {
+    //add your statement here
+});
+
+Template.${template}.onDestroyed(function() {
+    //add your statement here
+});
+
