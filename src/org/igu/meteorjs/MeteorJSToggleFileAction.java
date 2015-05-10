@@ -172,7 +172,9 @@ public class MeteorJSToggleFileAction extends AnAction {
             @Override
             public void run() {
                 try {
-                    dir.createFile(name).getVirtualFile().setBinaryContent(fileContents.getBytes());
+                    final PsiFile file = dir.createFile(name);
+                    file.getVirtualFile().setBinaryContent(fileContents.getBytes());
+                    file.navigate(true);
                 } catch (IOException e) {
                     throw new RuntimeException("Unable to write file '" + name + ":" + e.getMessage());
                 }
