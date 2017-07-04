@@ -13,6 +13,13 @@
       <option name="HTML" value="true" />
     </context>
   </template>
+  <template name="mwi" value="{{#with $statement$}}&#10;  $END$&#10;{{/with}}" description="Blaze #with" toReformat="false" toShortenFQNames="true">
+    <variable name="collection" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML_TEXT" value="true" />
+      <option name="HTML" value="true" />
+    </context>
+  </template>
   <template name="mif" value="{{#if $statement$}}&#10;  $END$&#10;{{/if}}" description="Blaze #if." toReformat="true" toShortenFQNames="true">
     <variable name="statement" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
