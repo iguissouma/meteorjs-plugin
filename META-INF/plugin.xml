@@ -1,7 +1,7 @@
 <idea-plugin version="2">
     <id>com.igu.meteorjs</id>
     <name>Meteor JS Template</name>
-    <version>0.6.1</version>
+    <version>0.6.2</version>
     <vendor email="issam.guissouma@laposte.net">iguissouma</vendor>
 
     <description><![CDATA[
@@ -15,6 +15,10 @@
     ]]></description>
 
     <change-notes><![CDATA[
+    Version 0.6.2<br>
+      <ul>
+          <li>Add with tag livetemplate</li>
+      </ul>
      Version 0.6.1<br>
       <ul>
           <li>Automatically navigate to created file</li>

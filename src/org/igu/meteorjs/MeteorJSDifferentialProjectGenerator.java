@@ -21,13 +21,13 @@ public class MeteorJSDifferentialProjectGenerator extends AbstractGithubTagDownl
 
     @NotNull
     @Override
-    protected String getGithubUserName() {
+    public String getGithubUserName() {
         return "Differential";
     }
 
     @NotNull
     @Override
-    protected String getGithubRepositoryName() {
+    public String getGithubRepositoryName() {
         return "meteor-boilerplate";
     }
 
