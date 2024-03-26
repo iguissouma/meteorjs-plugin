@@ -1,7 +1,7 @@
 <idea-plugin version="2">
     <id>com.igu.meteorjs</id>
     <name>Meteor JS Template</name>
-    <version>0.6.2</version>
+    <version>0.6.3</version>
     <vendor email="issam.guissouma@laposte.net">iguissouma</vendor>
 
     <description><![CDATA[
@@ -15,6 +15,10 @@
     ]]></description>
 
     <change-notes><![CDATA[
+    Version 0.6.3<br>
+      <ul>
+          <li>Add missing attribute to plugin.xml</li>
+      </ul>
     Version 0.6.2<br>
       <ul>
           <li>Add with tag livetemplate</li>
@@ -75,6 +79,7 @@
                             serviceImplementation="org.igu.meteorjs.settings.MeteorJSTemplateSettings"/>
         <projectConfigurable
                 instance="org.igu.meteorjs.settings.MeteorJSTemplateConfigurable"
+                displayName="Meteor JS Template"
                 id="settings.meteor.js.template"
                 parentId="Settings.JavaScript"
                 order="last, after settings.phonegap"/>
