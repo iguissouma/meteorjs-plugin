@@ -20,11 +20,6 @@ public class MeteorJSBoilerplateModuleBuilder extends WebModuleBuilder {
     }
 
     @Override
-    public Icon getBigIcon() {
-        return MeteorJSIcons.Meteor;
-    }
-
-    @Override
     public Icon getNodeIcon() {
         return MeteorJSIcons.Meteor;
     }
@@ -48,6 +43,4 @@ public class MeteorJSBoilerplateModuleBuilder extends WebModuleBuilder {
     public String getParentGroup() {
         return "Static Web";
     }
-
-
 }

@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
   name = "MeteorJSTemplateSettings",
   storages = {
     @Storage(
-      file = StoragePathMacros.APP_CONFIG + "/other.xml"
+      file = StoragePathMacros.NON_ROAMABLE_FILE
     )}
 )
 public class MeteorJSTemplateSettings implements PersistentStateComponent<MeteorJSTemplateSettings> {
